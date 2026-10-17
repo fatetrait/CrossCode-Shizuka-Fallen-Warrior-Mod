@@ -1,0 +1,14 @@
+{
+	"id": "apollo-fallen-warrior",
+	"title": "Apollo Fallen Warrior",
+	"version": "1.0.0",
+	"description": "(low effort warning) Makes the Apollo PvP Arena Fight 'funnier'. Pair with the Get on my Level NG+ mod for best results. Requires DLC.",
+	"authors": "fatetraitor",
+	"tags": ["boss", "arena", "fun"],
+	"repository": "https://github.com/fatetrait/CrossCode-Apollo-Fallen-Warrior-Mod",
+	"dependencies": {
+		"ccloader": ">=2.24.0",
+		"crosscode": ">=1.4.0",
+		"item-api": "^0.4.0"
+	}
+}
