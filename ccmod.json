@@ -1,11 +1,11 @@
 {
-	"id": "apollo-fallen-warrior",
-	"title": "Apollo Fallen Warrior",
+	"id": "shizuka-fallen-warrior",
+	"title": "Shizuka Fallen Warrior",
 	"version": "1.0.0",
-	"description": "(low effort warning) Makes the Apollo PvP Arena Fight 'funnier'. Pair with the Get on my Level NG+ mod for best results. Requires DLC.",
+	"description": "(low effort warning) Makes the Shizuka PvP Arena Fight 'funnier'. Pair with the Get on my Level NG+ mod for best results. Requires DLC.",
 	"authors": "fatetraitor",
 	"tags": ["boss", "arena", "fun"],
-	"repository": "https://github.com/fatetrait/CrossCode-Apollo-Fallen-Warrior-Mod",
+	"repository": "https://github.com/fatetrait/CrossCode-Shizuka-Fallen-Warrior-Mod",
 	"dependencies": {
 		"ccloader": ">=2.24.0",
 		"crosscode": ">=1.4.0",

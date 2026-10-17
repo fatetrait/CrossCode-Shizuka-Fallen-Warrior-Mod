@@ -1,9 +1,9 @@
 {
     "level": 60,
     "params": {
-        "hp": 3518,
-        "attack": 349,
-        "defense": 350,
+        "hp": 7000,
+        "attack": 300,
+        "defense": 450,
         "focus": 351,
         "elemFactor": [
             0.92,
@@ -14,9 +14,9 @@
     },
     "elementModes": {
         "HEAT": {
-            "hp": 3782,
-            "attack": 343,
-            "defense": 376,
+            "hp": 7200,
+            "attack": 340,
+            "defense": 476,
             "focus": 377,
             "elemFactor": [
                 0.82,
@@ -26,9 +26,9 @@
             ]
         },
         "COLD": {
-            "hp": 3899,
-            "attack": 375,
-            "defense": 370,
+            "hp": 7400,
+            "attack": 300,
+            "defense": 570,
             "focus": 366,
             "elemFactor": [
                 1.39,
@@ -38,9 +38,9 @@
             ]
         },
         "SHOCK": {
-            "hp": 3782,
-            "attack": 355,
-            "defense": 332,
+            "hp": 7300,
+            "attack": 320,
+            "defense": 432,
             "focus": 448,
             "elemFactor": [
                 0.96,
@@ -50,9 +50,9 @@
             ]
         },
         "WAVE": {
-            "hp": 3782,
-            "attack": 331,
-            "defense": 388,
+            "hp": 7500,
+            "attack": 300,
+            "defense": 488,
             "focus": 377,
             "elemFactor": [
                 0.96,
@@ -125,7 +125,7 @@
     "DOCTYPE": "ENEMY",
     "trackers": {
         "move": {
-            "target": 5,
+            "target": 2,
             "initRandom": 0,
             "resetRandom": 0.3,
             "noStateReset": false,
@@ -139,20 +139,20 @@
             "type": "HIT"
         },
         "brakeOver": {
-            "target": 4,
+            "target": 0.5,
             "initRandom": 0,
             "resetRandom": 0,
             "noStateReset": false,
             "type": "TIME"
         },
         "brakeSkipHits": {
-            "target": 8,
+            "target": 2,
             "scaleDmgFactor": false,
             "scaleEnemyFactor": false,
             "type": "HIT"
         },
         "counterHits": {
-            "target": 5,
+            "target": 2,
             "scaleDmgFactor": false,
             "scaleEnemyFactor": false,
             "type": "HIT"
@@ -298,6 +298,10 @@
                     ],
                     "action": "Strat_CloseSpecial",
                     "frequency": "OFTEN"
+                },
+                {
+                    "action": "Strat_ThrowBalls",
+                    "frequency": "SOMETIMES"
                 },
                 {
                     "action": "Strat_CloseCombat",
@@ -489,14 +493,246 @@
         }
     },
     "proxies": {
+        "lightningStarter": {
+            "effects": "ball-shock",
+            "speed": 700,
+            "maxBounce": 0,
+            "timer": 1,
+            "trail": true,
+            "multiHit": false,
+            "light": "XL",
+            "noLightGlow": false,
+            "animation": {
+                "name": "default",
+                "gfxOffset": {
+                    "x": 0,
+                    "y": 0
+                },
+                "sheet": {
+                    "src": "media\/entity\/effects\/lighter-particle.png",
+                    "offX": 144,
+                    "offY": 0,
+                    "width": 16,
+                    "height": 16
+                },
+                "renderMode": "lighter",
+                "time": 0.05,
+                "repeat": true,
+                "frames": [
+                    0
+                ]
+            },
+            "breakType": "COMBATANT",
+            "action": [
+                {
+                    "posType": "TARGET",
+                    "align": "CENTER",
+                    "type": "SET_HIT_PROXY",
+                    "proxy": "lightningSmall",
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "value": 700,
+                    "type": "SET_SPEED"
+                },
+                {
+                    "time": 1,
+                    "cancelOnHit": true,
+                    "type": "TACKLE",
+                    "attack": {
+                        "type": "MEDIUM",
+                        "element": "SHOCK",
+                        "damageFactor": 0.5,
+                        "spFactor": 0,
+                        "guardable": "",
+                        "skillBonus": "RANGED_DMG"
+                    }
+                }
+            ],
+            "invisible": false,
+            "hp": 0,
+            "stickToSource": "NONE",
+            "group": "",
+            "config": {
+                "collType": "PROJECTILE",
+                "airFriction": 1,
+                "zGravityFactor": 0,
+                "relativeVel": 1
+            },
+            "type": "BALL",
+            "attack": {
+                "type": "MEDIUM",
+                "element": "SHOCK",
+                "damageFactor": 0.5,
+                "reverse": false,
+                "hints": [
+                    "CHARGED"
+                ],
+                "guardable": "",
+                "skillBonus": "RANGED_DMG",
+                "limiter": ""
+            },
+            "timeBoni": null,
+            "behaviors": []
+        },
+        "lightningSmall": {
+            "copyOwnerAnims": false,
+            "breakType": "COMBATANT",
+            "action": [
+                {
+                    "duration": -1,
+                    "align": "BOTTOM",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "target2": "PROXY_OWNER",
+                    "target2Align": "CENTER",
+                    "fixPos": false,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.shock",
+                        "name": "boldConnect"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "duration": -1,
+                    "align": "BOTTOM",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "fixPos": false,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.shock",
+                        "name": "boldPre"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "value": 800,
+                    "type": "SET_SPEED"
+                },
+                {
+                    "min": 0,
+                    "max": 0,
+                    "maxTime": 1,
+                    "forceTime": true,
+                    "type": "MOVE_TO_DISTANCE"
+                },
+                {
+                    "type": "CLEAR_EFFECTS"
+                },
+                {
+                    "duration": 0,
+                    "align": "BOTTOM",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "target2": "SELF",
+                    "target2Offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 480
+                    },
+                    "fixPos": false,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.shock",
+                        "name": "boldSmall"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "align": "BOTTOM",
+                    "radius": 24,
+                    "yScale": 0,
+                    "zHeight": 0,
+                    "centralAngle": 0,
+                    "duration": 0.1,
+                    "expandRadius": 0,
+                    "alwaysFull": true,
+                    "clockwise": false,
+                    "flipLeftFace": 0,
+                    "rectangular": false,
+                    "repeat": false,
+                    "uniformHitDir": false,
+                    "fixPos": false,
+                    "checkCollision": false,
+                    "type": "CIRCLE_ATTACK",
+                    "attack": {
+                        "type": "HEAVY",
+                        "element": "SHOCK",
+                        "damageFactor": 4,
+                        "reverse": false,
+                        "status": 0.5,
+                        "hints": [
+                            "CHARGED"
+                        ],
+                        "guardable": "",
+                        "skillBonus": "RANGED_DMG"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "time": 0.4,
+                    "type": "WAIT"
+                }
+            ],
+            "invisible": false,
+            "hp": 0,
+            "stickToSource": "NONE",
+            "stickFaceAlign": false,
+            "group": "",
+            "startAnim": "",
+            "label": "worstbirthdayever",
+            "size": {
+                "x": 16,
+                "y": 16,
+                "z": 32
+            },
+            "config": {
+                "collType": "NONE",
+                "floatVariance": 0,
+                "flyHeight": 1
+            },
+            "type": "GENERIC"
+        },
         "defaultNeutral": {
             "effects": "ball",
             "speed": 550,
-            "maxBounce": 0,
-            "timer": 1,
+            "maxBounce": 2,
+            "timer": 6,
             "trail": false,
             "multiHit": false,
             "noLightGlow": false,
+            "bounceProxy": "chargedNeutral",
             "attack": {
                 "type": "LIGHT",
                 "element": "NEUTRAL",
@@ -527,8 +763,8 @@
         "defaultHeat": {
             "effects": "ball-heat",
             "speed": 550,
-            "maxBounce": 0,
-            "timer": 1,
+            "maxBounce": 2,
+            "timer": 6,
             "trail": false,
             "multiHit": false,
             "noLightGlow": false,
@@ -547,6 +783,8 @@
                     4
                 ]
             },
+            "bounceProxy": "chargedHeat",
+            "destroyProxy": "mine",
             "attack": {
                 "type": "LIGHT",
                 "element": "HEAT",
@@ -563,8 +801,8 @@
         "defaultCold": {
             "effects": "ball-cold",
             "speed": 550,
-            "maxBounce": 0,
-            "timer": 1,
+            "maxBounce": 2,
+            "timer": 6,
             "trail": false,
             "multiHit": false,
             "noLightGlow": false,
@@ -583,6 +821,8 @@
                     4
                 ]
             },
+            "bounceProxy": "chargedCold",
+            "destroyProxy": "iceSnowball",
             "attack": {
                 "type": "LIGHT",
                 "element": "COLD",
@@ -599,8 +839,8 @@
         "defaultShock": {
             "effects": "ball-shock",
             "speed": 550,
-            "maxBounce": 0,
-            "timer": 1,
+            "maxBounce": 2,
+            "timer": 6,
             "trail": false,
             "multiHit": false,
             "noLightGlow": false,
@@ -619,6 +859,8 @@
                     4
                 ]
             },
+            "destroyProxy": "lightningStarter",
+            "bounceProxy": "chargedShock",
             "attack": {
                 "type": "LIGHT",
                 "element": "SHOCK",
@@ -635,8 +877,8 @@
         "defaultWave": {
             "effects": "ball-wave",
             "speed": 550,
-            "maxBounce": 0,
-            "timer": 1,
+            "maxBounce": 2,
+            "timer": 6,
             "trail": false,
             "multiHit": false,
             "noLightGlow": false,
@@ -655,6 +897,8 @@
                     4
                 ]
             },
+            "destroyProxy": "waveGun",
+            "bounceProxy": "chargedWave",
             "attack": {
                 "type": "LIGHT",
                 "element": "WAVE",
@@ -672,7 +916,7 @@
             "effects": "ball",
             "speed": 600,
             "maxBounce": 3,
-            "timer": 1.5,
+            "timer": 6,
             "trail": true,
             "multiHit": false,
             "noLightGlow": false,
@@ -685,7 +929,7 @@
                 "hints": [
                     "CHARGED"
                 ],
-                "guardable": "",
+                "guardable": "NEVER",
                 "skillBonus": "RANGED_DMG",
                 "limiter": ""
             },
@@ -713,7 +957,7 @@
             "effects": "ball-heat",
             "speed": 600,
             "maxBounce": 3,
-            "timer": 1.5,
+            "timer": 6,
             "trail": true,
             "multiHit": false,
             "noLightGlow": false,
@@ -735,6 +979,7 @@
                     3
                 ]
             },
+            "destroyProxy": "chargedNeutral",
             "attack": {
                 "type": "HEAVY",
                 "element": "HEAT",
@@ -745,7 +990,7 @@
                 "hints": [
                     "CHARGED"
                 ],
-                "guardable": "",
+                "guardable": "NEVER",
                 "skillBonus": "RANGED_DMG",
                 "limiter": ""
             },
@@ -756,7 +1001,7 @@
             "effects": "ball-cold",
             "speed": 600,
             "maxBounce": 3,
-            "timer": 1.5,
+            "timer": 6,
             "trail": true,
             "multiHit": false,
             "noLightGlow": false,
@@ -778,6 +1023,7 @@
                     3
                 ]
             },
+            "destroyProxy": "chargedNeutral",
             "attack": {
                 "type": "HEAVY",
                 "element": "COLD",
@@ -789,7 +1035,7 @@
                     "CHARGED",
                     "STANDARD"
                 ],
-                "guardable": "",
+                "guardable": "NEVER",
                 "skillBonus": "RANGED_DMG",
                 "limiter": ""
             },
@@ -800,7 +1046,7 @@
             "effects": "ball-shock",
             "speed": 600,
             "maxBounce": 3,
-            "timer": 1.5,
+            "timer": 6,
             "trail": true,
             "multiHit": false,
             "noLightGlow": false,
@@ -822,6 +1068,7 @@
                     3
                 ]
             },
+            "destroyProxy": "chargedNeutral",
             "attack": {
                 "type": "HEAVY",
                 "element": "SHOCK",
@@ -833,7 +1080,7 @@
                     "CHARGED",
                     "STANDARD"
                 ],
-                "guardable": "",
+                "guardable": "NEVER",
                 "skillBonus": "RANGED_DMG",
                 "limiter": ""
             },
@@ -844,7 +1091,7 @@
             "effects": "ball-wave",
             "speed": 600,
             "maxBounce": 3,
-            "timer": 1.5,
+            "timer": 6,
             "trail": true,
             "multiHit": false,
             "noLightGlow": false,
@@ -866,6 +1113,7 @@
                     3
                 ]
             },
+            "destroyProxy": "chargedNeutral",
             "attack": {
                 "type": "HEAVY",
                 "element": "WAVE",
@@ -877,7 +1125,7 @@
                     "CHARGED",
                     "STANDARD"
                 ],
-                "guardable": "",
+                "guardable": "NEVER",
                 "skillBonus": "RANGED_DMG",
                 "limiter": ""
             },
@@ -3219,6 +3467,283 @@
             "timeBoni": null,
             "behaviors": []
         },
+        "waveGun2": {
+            "animation": {
+                "name": "default",
+                "gfxOffset": {
+                    "x": 0,
+                    "y": -4
+                },
+                "sheet": {
+                    "src": "media\/entity\/effects\/lighter-particle.png",
+                    "offX": 144,
+                    "offY": 0,
+                    "width": 16,
+                    "height": 16
+                },
+                "renderMode": "lighter",
+                "time": 0.05,
+                "repeat": true,
+                "frames": [
+                    0
+                ]
+            },
+            "copyOwnerAnims": false,
+            "breakType": "NEVER",
+            "action": [
+                {
+                    "attribName": "fly",
+                    "changeType": "set",
+                    "proxyOwner": false,
+                    "type": "SET_ATTRIB_NUMBER",
+                    "value": 2
+                },
+                {
+                    "duration": -1,
+                    "align": "CENTER",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "fixPos": false,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.wave",
+                        "name": "greenScreenLight"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "duration": -1,
+                    "align": "CENTER",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "fixPos": false,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.wave",
+                        "name": "waveGun"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "name": "start",
+                    "type": "LABEL"
+                },
+                {
+                    "attribName": "fly",
+                    "changeType": "sub",
+                    "proxyOwner": false,
+                    "type": "SET_ATTRIB_NUMBER",
+                    "value": 1
+                },
+                {
+                    "time": 0.5,
+                    "cancelOnHit": false,
+                    "collideCancel": 1,
+                    "orthoDirFactor": 0,
+                    "ignoreLastHit": false,
+                    "type": "TACKLE",
+                    "attack": {
+                        "type": "HEAVY",
+                        "element": "WAVE",
+                        "damageFactor": 3,
+                        "reverse": false,
+                        "guardable": "",
+                        "skillBonus": "RANGED_DMG"
+                    }
+                },
+                {
+                    "kind": "PROXY_OWNER",
+                    "type": "SET_TEMP_TARGET"
+                },
+                {
+                    "value": false,
+                    "immediately": true,
+                    "type": "FACE_TO_TARGET"
+                },
+                {
+                    "type": "STOP_XY"
+                },
+                {
+                    "duration": 0,
+                    "align": "CENTER",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "fixPos": true,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.wave",
+                        "name": "waveGunBounce"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "time": 0.5,
+                    "missReactTime": 0,
+                    "cancelOnHit": false,
+                    "collideCancel": 1,
+                    "orthoDirFactor": 0,
+                    "ignoreLastHit": false,
+                    "type": "TACKLE",
+                    "attack": {
+                        "type": "HEAVY",
+                        "element": "WAVE",
+                        "damageFactor": 3,
+                        "reverse": false,
+                        "guardable": "",
+                        "skillBonus": "RANGED_DMG"
+                    }
+                },
+                {
+                    "type": "STOP_XY"
+                },
+                {
+                    "duration": 0,
+                    "align": "CENTER",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "fixPos": true,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.wave",
+                        "name": "waveGunBounce"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "withElse": false,
+                    "type": "IF",
+                    "condition": "entity.attrib.fly > 0",
+                    "thenStep": [
+                        {
+                            "time": 0,
+                            "turn": 0.5,
+                            "random": 0,
+                            "type": "ROTATE_FACE"
+                        },
+                        {
+                            "time": 0,
+                            "type": "PLAYER_ADJUST_FACE"
+                        },
+                        {
+                            "searchType": "IN_VIEW",
+                            "distance": 600,
+                            "ignoreCurrentTarget": false,
+                            "prevHitBehavior": "NONE",
+                            "type": "SET_CLOSE_TEMP_TARGET"
+                        },
+                        {
+                            "value": false,
+                            "immediately": true,
+                            "type": "FACE_TO_TARGET"
+                        },
+                        {
+                            "name": "start",
+                            "type": "GOTO_LABEL"
+                        }
+                    ]
+                },
+                {
+                    "type": "CLEAR_EFFECTS"
+                },
+                {
+                    "duration": 0,
+                    "align": "CENTER",
+                    "rotateFace": 0,
+                    "flipLeftFace": false,
+                    "wait": false,
+                    "waitSkip": 0,
+                    "actionDetached": false,
+                    "fixPos": true,
+                    "type": "SHOW_EFFECT",
+                    "effect": {
+                        "sheet": "specials.wave",
+                        "name": "waveGunXplode"
+                    },
+                    "offset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "time": 0.3,
+                    "type": "WAIT"
+                }
+            ],
+            "invisible": false,
+            "hp": 0,
+            "stickToSource": "NONE",
+            "stickFaceAlign": false,
+            "group": "",
+            "startAnim": "",
+            "size": {
+                "x": 16,
+                "y": 16,
+                "z": 8
+            },
+            "effects": "specials.wave",
+            "effectKeys": {
+                "trail": "waveGun",
+                "wall": "waveGunXplode",
+                "air": "waveGunXplode"
+            },
+            "speed": 1200,
+            "maxBounce": 0,
+            "timer": 1,
+            "trail": true,
+            "multiHit": true,
+            "light": "XL",
+            "noLightGlow": false,
+            "type": "GENERIC",
+            "attack": {
+                "type": "HEAVY",
+                "element": "WAVE",
+                "damageFactor": 4,
+                "reverse": false,
+                "spFactor": 0,
+                "hints": [
+                    "CHARGED"
+                ],
+                "guardable": "",
+                "skillBonus": "RANGED_DMG"
+            },
+            "timeBoni": null,
+            "behaviors": [],
+            "config": {
+                "collType": "PROJECTILE",
+                "accelSpeed": 10,
+                "maxVel": 1200,
+                "zGravityFactor": 0
+            }
+        },
         "waveGunBounce": {
             "copyOwnerAnims": false,
             "breakType": "ACTION",
@@ -3792,8 +4317,8 @@
                 "type": "FACE_TO_TARGET"
             },
             {
-                "minTime": 0.1,
-                "maxTime": 0.3,
+                "minTime": 0.05,
+                "maxTime": 0.1,
                 "type": "WAIT_RANDOM"
             }
         ],
@@ -3811,7 +4336,7 @@
                 "type": "SET_RELATIVE_SPEED"
             },
             {
-                "maxTime": 0.4,
+                "maxTime": 0.1,
                 "forceTime": false,
                 "distance": 60,
                 "distVariance": 20,
@@ -3840,7 +4365,7 @@
                 "type": "SET_RELATIVE_SPEED"
             },
             {
-                "maxTime": 0.2,
+                "maxTime": 0.1,
                 "forceTime": false,
                 "distance": 80,
                 "distVariance": 30,
@@ -3870,7 +4395,7 @@
                 "type": "SET_RELATIVE_SPEED"
             },
             {
-                "maxTime": 0.2,
+                "maxTime": 0.1,
                 "forceTime": false,
                 "distance": 80,
                 "distVariance": 30,
@@ -3888,8 +4413,8 @@
                 "type": "FACE_TO_TARGET"
             },
             {
-                "minTime": 0.2,
-                "maxTime": 0.4,
+                "minTime": 0.05,
+                "maxTime": 0.1,
                 "type": "WAIT_RANDOM"
             }
         ],
@@ -3899,11 +4424,15 @@
                 "type": "FACE_TO_TARGET"
             },
             {
+                "value": 400,
+                "type": "SET_SPEED"
+            },
+            {
                 "value": 0.5,
                 "type": "SET_RELATIVE_SPEED"
             },
             {
-                "maxTime": 1,
+                "maxTime": 0.7,
                 "forceTime": false,
                 "distance": 120,
                 "throwing": true,
@@ -3938,7 +4467,7 @@
                         "type": "FACE_TO_TARGET"
                     },
                     {
-                        "value": 180,
+                        "value": 200,
                         "type": "SET_SPEED"
                     },
                     {
@@ -3977,7 +4506,7 @@
                         "type": "SET_RELATIVE_SPEED"
                     },
                     {
-                        "maxTime": 1,
+                        "maxTime": 0.3,
                         "forceTime": false,
                         "distance": 96,
                         "planOnly": false,
@@ -3999,6 +4528,10 @@
                 "type": "FACE_TO_TARGET"
             },
             {
+                "value": 230,
+                "type": "SET_SPEED"
+            },
+            {
                 "conditions": [
                     {
                         "negated": false,
@@ -4015,7 +4548,7 @@
                         "type": "FACE_TO_TARGET"
                     },
                     {
-                        "value": 180,
+                        "value": 230,
                         "type": "SET_SPEED"
                     },
                     {
@@ -4038,7 +4571,7 @@
                         "anim": "dash"
                     },
                     {
-                        "maxTime": 0.3,
+                        "maxTime": 0.2,
                         "forceTime": false,
                         "distance": 160,
                         "throwing": true,
@@ -4053,7 +4586,7 @@
                         "type": "SET_RELATIVE_SPEED"
                     },
                     {
-                        "maxTime": 1,
+                        "maxTime": 0.3,
                         "forceTime": false,
                         "distance": 160,
                         "throwing": true,
@@ -4070,6 +4603,10 @@
                 "reaction": "DOOOOOOODGE"
             },
             {
+                "value": 230,
+                "type": "SET_SPEED"
+            },
+            {
                 "value": 0.7,
                 "type": "SET_RELATIVE_SPEED"
             },
@@ -4078,7 +4615,7 @@
                 "type": "SET_HIT_STABLE"
             },
             {
-                "maxTime": 0.5,
+                "maxTime": 0.2,
                 "forceTime": false,
                 "distance": 60,
                 "planOnly": false,
@@ -4090,6 +4627,10 @@
         ],
         "MoveSidways": [
             {
+                "value": 230,
+                "type": "SET_SPEED"
+            },
+            {
                 "value": false,
                 "type": "FACE_TO_TARGET"
             },
@@ -4098,7 +4639,7 @@
                 "type": "SET_RELATIVE_SPEED"
             },
             {
-                "maxTime": 0.5,
+                "maxTime": 0.2,
                 "forceTime": false,
                 "distance": 100,
                 "distVariance": 20,
@@ -4764,6 +5305,14 @@
                 "type": "COMBAT_SWEEP"
             },
             {
+                "elementProxy": "QUICK",
+                "type": "SHOOT_PROXY_PLAYER"
+            },
+            {
+                "type": "CONSUME_SP",
+                "sp": -0.1
+            },
+            {
                 "time": 0.05,
                 "stopBeforeEdge": false,
                 "type": "MOVE_FORWARD"
@@ -4771,6 +5320,45 @@
             {
                 "time": 0.16,
                 "type": "WAIT"
+            },
+            {
+                "type": "SELECT_RANDOM",
+                "options": [
+                    {
+                        "0": " ",
+                        "count": 4,
+                        "weight": 1,
+                        "activeCondition": "true"
+                    }
+                ],
+                "0_0": [
+                    {
+                        "element": "COLD",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_1": [
+                    {
+                        "element": "WAVE",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_2": [
+                    {
+                        "element": "SHOCK",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_3": [
+                    {
+                        "element": "HEAT",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ]
             },
             {
                 "followUp": "attackEnd",
@@ -4791,6 +5379,14 @@
                 "type": "COMBAT_SWEEP"
             },
             {
+                "elementProxy": "QUICK",
+                "type": "SHOOT_PROXY_PLAYER"
+            },
+            {
+                "type": "CONSUME_SP",
+                "sp": -0.1
+            },
+            {
                 "time": 0.05,
                 "stopBeforeEdge": false,
                 "type": "MOVE_FORWARD"
@@ -4798,6 +5394,45 @@
             {
                 "time": 0.16,
                 "type": "WAIT"
+            },
+            {
+                "type": "SELECT_RANDOM",
+                "options": [
+                    {
+                        "0": " ",
+                        "count": 4,
+                        "weight": 1,
+                        "activeCondition": "true"
+                    }
+                ],
+                "0_0": [
+                    {
+                        "element": "COLD",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_1": [
+                    {
+                        "element": "WAVE",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_2": [
+                    {
+                        "element": "SHOCK",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_3": [
+                    {
+                        "element": "HEAT",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ]
             },
             {
                 "followUp": "attackEndRev",
@@ -4818,6 +5453,14 @@
                 "type": "COMBAT_SWEEP"
             },
             {
+                "elementProxy": "QUICK",
+                "type": "SHOOT_PROXY_PLAYER"
+            },
+            {
+                "type": "CONSUME_SP",
+                "sp": -0.1
+            },
+            {
                 "time": 0.05,
                 "stopBeforeEdge": false,
                 "type": "MOVE_FORWARD"
@@ -4825,6 +5468,45 @@
             {
                 "time": 0.16,
                 "type": "WAIT"
+            },
+            {
+                "type": "SELECT_RANDOM",
+                "options": [
+                    {
+                        "0": " ",
+                        "count": 4,
+                        "weight": 1,
+                        "activeCondition": "true"
+                    }
+                ],
+                "0_0": [
+                    {
+                        "element": "COLD",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_1": [
+                    {
+                        "element": "WAVE",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_2": [
+                    {
+                        "element": "SHOCK",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ],
+                "0_3": [
+                    {
+                        "element": "HEAT",
+                        "skipEffect": false,
+                        "type": "SET_ENEMY_ELEMENT_MODE"
+                    }
+                ]
             },
             {
                 "followUp": "attackEnd",
@@ -4843,6 +5525,14 @@
                 "faceCount": 8,
                 "flipLeftFace": false,
                 "type": "COMBAT_SWEEP"
+            },
+            {
+                "elementProxy": "CHARGED",
+                "type": "SHOOT_PROXY_PLAYER"
+            },
+            {
+                "type": "CONSUME_SP",
+                "sp": -0.1
             },
             {
                 "value": 200,
@@ -4865,10 +5555,6 @@
                 "time": 0.2,
                 "stopBeforeEdge": false,
                 "type": "MOVE_FORWARD"
-            },
-            {
-                "time": 0.1,
-                "type": "WAIT"
             },
             {
                 "type": "DISABLE_REACTION",
@@ -4964,10 +5650,6 @@
                 ]
             },
             {
-                "time": 0.2,
-                "type": "WAIT"
-            },
-            {
                 "conditions": [
                     {
                         "distance": 48,
@@ -5006,7 +5688,7 @@
                         "changeType": "set",
                         "proxyOwner": false,
                         "type": "SET_ATTRIB_NUMBER",
-                        "value": 3
+                        "value": 5
                     },
                     {
                         "conditions": [
@@ -5039,7 +5721,7 @@
                                 "anim": "dash"
                             },
                             {
-                                "maxTime": 0.3,
+                                "maxTime": 0.12,
                                 "forceTime": false,
                                 "distance": 130,
                                 "distVariance": 40,
@@ -5056,10 +5738,6 @@
                             },
                             {
                                 "type": "CLEAR_ANIMATION"
-                            },
-                            {
-                                "time": 0.1,
-                                "type": "WAIT"
                             }
                         ],
                         "elseStep": [
@@ -5078,7 +5756,7 @@
                                 "anim": "aimMove"
                             },
                             {
-                                "maxTime": 0.5,
+                                "maxTime": 0.2,
                                 "forceTime": false,
                                 "distance": 130,
                                 "distVariance": 40,
@@ -5115,7 +5793,7 @@
                         "type": "SET_RELATIVE_SPEED"
                     },
                     {
-                        "maxTime": 0.18,
+                        "maxTime": 0.09,
                         "forceTime": false,
                         "distance": 60,
                         "distVariance": 20,
@@ -5140,6 +5818,45 @@
                 "type": "IF",
                 "condition": "entity.attrib.throws > 1",
                 "thenStep": [
+                    {
+                        "type": "SELECT_RANDOM",
+                        "options": [
+                            {
+                                "0": " ",
+                                "count": 4,
+                                "weight": 1,
+                                "activeCondition": "true"
+                            }
+                        ],
+                        "0_0": [
+                            {
+                                "element": "COLD",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ],
+                        "0_1": [
+                            {
+                                "element": "WAVE",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ],
+                        "0_2": [
+                            {
+                                "element": "SHOCK",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ],
+                        "0_3": [
+                            {
+                                "element": "HEAT",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ]
+                    },
                     {
                         "attribName": "throws",
                         "changeType": "sub",
@@ -5167,7 +5884,7 @@
                         "type": "SHOOT_PROXY_PLAYER"
                     },
                     {
-                        "maxTime": 0.18,
+                        "maxTime": 0.09,
                         "forceTime": false,
                         "distance": 60,
                         "distVariance": 20,
@@ -5176,6 +5893,45 @@
                         "planOnly": false,
                         "precise": false,
                         "type": "NAVIGATE_SIDEWAYS_TARGET"
+                    },
+                    {
+                        "type": "SELECT_RANDOM",
+                        "options": [
+                            {
+                                "0": " ",
+                                "count": 4,
+                                "weight": 1,
+                                "activeCondition": "true"
+                            }
+                        ],
+                        "0_0": [
+                            {
+                                "element": "COLD",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ],
+                        "0_1": [
+                            {
+                                "element": "WAVE",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ],
+                        "0_2": [
+                            {
+                                "element": "SHOCK",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ],
+                        "0_3": [
+                            {
+                                "element": "HEAT",
+                                "skipEffect": false,
+                                "type": "SET_ENEMY_ELEMENT_MODE"
+                            }
+                        ]
                     },
                     {
                         "followUp": "throwEnd",
@@ -5193,7 +5949,7 @@
                         "type": "SHOOT_PROXY_PLAYER"
                     },
                     {
-                        "maxTime": 0.18,
+                        "maxTime": 0.09,
                         "forceTime": false,
                         "distance": 60,
                         "distVariance": 20,
@@ -5202,6 +5958,10 @@
                         "planOnly": false,
                         "precise": false,
                         "type": "NAVIGATE_SIDEWAYS_TARGET"
+                    },
+                    {
+                        "type": "CONSUME_SP",
+                        "sp": -0.1
                     },
                     {
                         "name": "throwStart",
@@ -11259,7 +12019,7 @@
                 "condition": "pvp.playerPoints >=3",
                 "thenStep": [
                     {
-                        "forceValue": 0.33,
+                        "forceValue": 0.1,
                         "type": "RESET_TRACKER",
                         "tracker": "brakeOver"
                     }
