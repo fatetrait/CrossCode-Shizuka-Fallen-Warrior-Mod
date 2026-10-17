@@ -496,12 +496,17 @@
         "lightningStarter": {
             "effects": "ball-shock",
             "speed": 700,
-            "maxBounce": 0,
-            "timer": 1,
+            "maxBounce": 1,
+            "timer": 4,
             "trail": true,
             "multiHit": false,
             "light": "XL",
             "noLightGlow": false,
+            "size": {
+                "x": 16,
+                "y": 16,
+                "z": 32
+            },
             "animation": {
                 "name": "default",
                 "gfxOffset": {
@@ -524,6 +529,15 @@
             },
             "breakType": "COMBATANT",
             "action": [
+                {
+                    "kind": "PLAYER",
+                    "type": "SET_TEMP_TARGET"
+                },
+                {
+                    "value": false,
+                    "immediately": true,
+                    "type": "FACE_TO_TARGET"
+                },
                 {
                     "posType": "TARGET",
                     "align": "CENTER",
@@ -563,21 +577,7 @@
                 "zGravityFactor": 0,
                 "relativeVel": 1
             },
-            "type": "BALL",
-            "attack": {
-                "type": "MEDIUM",
-                "element": "SHOCK",
-                "damageFactor": 0.5,
-                "reverse": false,
-                "hints": [
-                    "CHARGED"
-                ],
-                "guardable": "",
-                "skillBonus": "RANGED_DMG",
-                "limiter": ""
-            },
-            "timeBoni": null,
-            "behaviors": []
+            "type": "GENERIC"
         },
         "lightningSmall": {
             "copyOwnerAnims": false,
@@ -897,7 +897,7 @@
                     4
                 ]
             },
-            "destroyProxy": "waveGun",
+            "destroyProxy": "waveGunFallen",
             "bounceProxy": "chargedWave",
             "attack": {
                 "type": "LIGHT",
@@ -3066,6 +3066,62 @@
                 "zGravityFactor": 0
             },
             "type": "GENERIC"
+        },
+        "waveGunFallen": {
+            "size": {
+                "x": 16,
+                "y": 16,
+                "z": 8
+            },
+            "effects": "specials.wave",
+            "effectKeys": {
+                "trail": "waveGun",
+                "wall": "waveGunXplode",
+                "air": "waveGunXplode"
+            },
+            "speed": 1200,
+            "maxBounce": 1,
+            "timer": 3,
+            "trail": true,
+            "multiHit": true,
+            "light": "XL",
+            "noLightGlow": false,
+            "type": "BALL",
+            "animation": {
+                "name": "default",
+                "gfxOffset": {
+                    "x": 0,
+                    "y": -4
+                },
+                "sheet": {
+                    "src": "media\/entity\/effects\/lighter-particle.png",
+                    "offX": 144,
+                    "offY": 0,
+                    "width": 16,
+                    "height": 16
+                },
+                "renderMode": "lighter",
+                "time": 0.05,
+                "repeat": true,
+                "frames": [
+                    0
+                ]
+            },
+            "attack": {
+                "type": "HEAVY",
+                "element": "WAVE",
+                "damageFactor": 4,
+                "reverse": false,
+                "spFactor": 0,
+                "hints": [
+                    "CHARGED"
+                ],
+                "guardable": "",
+                "skillBonus": "RANGED_DMG",
+                "limiter": ""
+            },
+            "timeBoni": null,
+            "behaviors": []
         },
         "waveGun": {
             "size": {
